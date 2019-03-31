@@ -1,12 +1,12 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 
-import { Lab11Component } from "./lab11/lab11.component";
+import { ClassroomComponent } from "./classroom/classroom.component";
 
 const routes: Routes = [
   {
-    path: "/lab11",
-    component: Lab11Component
+    path: "*",
+    component: ClassroomComponent
   }
 ];
 

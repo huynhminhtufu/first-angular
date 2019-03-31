@@ -1,0 +1,94 @@
+<div class="container">
+  <h2 class="mt-4 mb-4">Classroom RESTful Service</h2>
+  <div class="row" *ngIf="addNewFormDisplay">
+    <div class="col-lg-3">
+      <h4>Add new Class form</h4>
+      <form [formGroup]="addNewForm" (ngSubmit)="onAddSubmit()">
+        <div class="form-group">
+          <input
+            formControlName="id"
+            type="text"
+            class="form-control"
+            placeholder="ID"
+          />
+        </div>
+        <div class="form-group">
+          <input
+            formControlName="name"
+            type="text"
+            class="form-control"
+            placeholder="Name"
+          />
+        </div>
+        <div class="form-group">
+          <input
+            formControlName="teacher"
+            type="text"
+            class="form-control"
+            placeholder="Teacher"
+          />
+        </div>
+        <div class="form-group">
+          <input
+            formControlName="amount"
+            type="text"
+            class="form-control"
+            placeholder="Amount"
+          />
+        </div>
+        <div class="form-group">
+          <button class="btn btn-secondary" [disabled]="!addNewForm.valid">
+            Add new classroom
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <button (click)="toggleAddNew()" class="btn btn-primary mb-4">
+    {{ addNewFormDisplay ? "Close add new form" : "Open add new form" }}
+  </button>
+  <div *ngIf="!classroomData" class="alert alert-primary">
+    Loading...
+  </div>
+  <div *ngIf="classroomData">
+    <table class="table table-striped">
+      <thead>
+        <th scope="col">#</th>
+        <th scope="col">ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Teacher</th>
+        <th scope="col">Amount</th>
+        <th scope="col">Actions</th>
+      </thead>
+      <tbody>
+        <tr *ngIf="!classroomData.length">
+          <td colspan="6">There's no classroom by now.</td>
+        </tr>
+        <tr *ngFor="let classroom of classroomData; index as index">
+          <th scope="row">{{ index + 1 }}</th>
+          <td>{{ classroom.id }}</td>
+          <td>{{ classroom.name }}</td>
+          <td>{{ classroom.teacher }}</td>
+          <td>{{ classroom.amount }}</td>
+          <td>
+            <div class="row">
+              <button (click)="onDetails(index)" class="btn btn-primary mb-2">
+                Print Classroom
+              </button>
+            </div>
+            <div class="row">
+              <button (click)="onEdit(index)" class="btn btn-secondary mb-2">
+                Edit Classroom
+              </button>
+            </div>
+            <div class="row">
+              <button (click)="onDelete(index)" class="btn btn-danger mb-2">
+                Delete Classroom
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
